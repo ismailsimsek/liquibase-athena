@@ -1,0 +1,344 @@
+﻿==============================================================================
+Magnitude Simba Amazon Athena JDBC Data Connector Release Notes 
+==============================================================================
+
+The release notes provide details of enhancements, features, known issues, and
+workflow changes in Simba Amazon Athena JDBC Connector 2.0.36, as well as the 
+version history. 
+
+
+2.0.36 =======================================================================
+
+Released 2023-04-07
+
+Enhancements & New Features
+
+ * [AJ-497] Support for loginToRP feature
+
+   When using ADFS authentication, you can now use your own relying party 
+   identifier. To do this, set the loginToRP property to your party 
+   identifier. For more information, see the Installation and Configuration 
+   Guide.
+
+ * [AJ-500] Support for ApplicationName feature
+
+   You can now obtain the name of the application using the connector. To do 
+   this, type the name of the application in the ApplicationName property. For
+   more information, see the Installation and Configuration Guide.
+
+
+Resolved Issues
+The following issues have been resolved in Simba Amazon Athena JDBC Connector 
+2.0.36. 
+ 
+ * [AJ-478] When getSchema() is used to retrieve the non-existent schema, the 
+   connector returns an error.
+
+ 
+Workflow Changes =============================================================
+
+The following changes may disrupt established workflows for the connector.
+
+
+2.0.31 -----------------------------------------------------------------------
+ 
+ * Removed support for JDBC API  
+ 
+   Beginning with this release, the connector no longer supports JDBC API 
+   version 4.1 (Java 7). For a list of supported JDBC versions, see the 
+   Installation and Configuration Guide. 
+
+
+ * [AJ-461] Downgraded third-party libraries
+ 
+   For JDBC 4.1 (Java 7), the connector now uses the following libraries:   
+   - Log4j-api 2.12.1 (previously 2.17.1)
+   - Log4j-core 2.12.1 (previously 2.17.1)   
+   - Log4j-jcl 2.12.1 (previously 2.17.2)  
+   - jackson-annotations 2.12.1 (previously 2.13.2)
+   - jackson-core 2.12.1 (previously 2.13.2)
+   - jackson-databind 2.12.1 (previously 2.13.2.2)
+   - jackson-dataformat-cbor 2.12.1 (previously 2.13.2)  
+
+
+2.0.26 -----------------------------------------------------------------------
+
+ * Updated class path
+
+   The com.amazonaws class path has been changed to 
+   com.simba.athena.amazonaws. For more information, see the Installation and 
+   Configuration Guide.
+
+
+2.0.25 -----------------------------------------------------------------------
+
+ * Updated class path
+
+   The com.simba.athena.amazonaws class path has been changed to 
+   com.amazonaws. For more information, see the Installation and Configuration
+   Guide.
+
+
+2.0.23 -----------------------------------------------------------------------
+
+ * [AJ-392] Updated Workgroup property 
+
+   The default value for the Workgroup property has been changed to primary.
+   Previously, the default value was null. For more information, see the
+   Installation and Configuration Guide.
+
+
+2.0.13 -----------------------------------------------------------------------
+
+ * [AJ-314] Updated MetadataRetrievalMethod property 
+
+   The default value for the MetadataRetrievalMethod property has been changed
+   to Auto. Previously, the default value was ProxyAPI. For more information,
+   see the Installation and Configuration Guide.
+
+
+2.0.2 ------------------------------------------------------------------------
+
+ * Removed support for JDBC 4.0
+ 
+   Beginning with this release, the driver no longer supports JDBC 4 (Java 6). 
+   For a list of supported JDBC versions, see the Installation and 
+   Configuration Guide. 
+
+   For more information about this workflow change, see the "Jackson library 
+   updated" release note in the "Enhancements & New Features" section of this 
+   2.0.2 release.
+
+   
+2.0.0 ------------------------------------------------------------------------
+
+ * SDK interfaces
+
+   The following AWS SDK interfaces are no longer shaded in the driver jar,
+   they are included with the original AWS SDK package names. Any custom
+   credential providers that use the old shaded package names for these
+   interfaces must be updated.  
+   - com.amazonaws.auth.AWSCredentials
+   - com.amazonaws.auth.AWSCredentialsProvider
+   - com.amazonaws.auth.AWSSessionCredentials
+   - com.amazonaws.auth.AWSSessionCredentialsProvider   
+
+
+Version History ==============================================================
+
+2.0.35 -----------------------------------------------------------------------
+
+Released 2022-12-22
+
+Enhancements & New Features
+
+ * [AJ-495] Updated Jackson libraries 
+
+   The connector now uses the following libraries for the Jackson JSON parser:
+   - jackson-annotations 2.14.0 (previously 2.13.2)
+   - jackson-core 2.14.0 (previously 2.13.2)
+   - jackson-databind 2.14.0 (previously 2.13.2.2)   
+ 
+
+2.0.34 -----------------------------------------------------------------------
+
+Released 2022-11-24
+
+Enhancements & New Features
+
+ * [AJ-466] Ec2InstanceMetadata support
+
+   The connector now supports Ec2InstanceMetadata authentication method 
+   using the IAM Instance Profile. 
+
+ * [AJ-440] Support for reusing query results 
+
+   You can now reuse the results of previously executed queries depending upon
+   the type of the query and the age in minutes. To do this, set the
+   enableResultReuseByAge and maxResultReuseAgeInMinutes properties. For more
+   information, see the Installation and Configuration Guide.
+
+
+Resolved Issues
+The following issues have been resolved in Simba Amazon Athena JDBC Connector 
+2.0.34. 
+   
+ * [AJ-480] When executing queries, European or German letters cause an 
+   exception.
+
+ * [AJ-489] When the connection is initiated in 
+   BrowserAzureCredentialsProvider, the redirect URI is not populated.
+
+ * [AJ-491] Some of the AWS dependencies packaged with the connector contain 
+   vulnerability.
+
+
+2.0.33 -----------------------------------------------------------------------
+
+Released 2022-10-04
+
+Enhancements & New Features
+
+ * [AJ-451] Updated AWS crendentials provider class
+
+   The following properties have been added to the User-Agent string in the 
+   AWS API: 
+   - DriverVersion
+   - javaVersion
+   - Plugin Name
+
+
+Resolved Issues
+The following issues have been resolved in Simba Amazon Athena JDBC Connector 
+2.0.33. 
+   
+ * [AJ-477] Exception messages do not provide detailed information. 
+   
+   This issue has been resolved. Server messages are now added to exception
+   messages. 
+
+ * [AJ-472] AWS workgroup has a limit of 1000 prepared statements. 
+
+   This issue has been resolved, the connector now deallocates the prepared
+   statements when: 
+   - the connection is closed
+   - the AthenaPreparedStatement execution fails
+
+
+2.0.32 -----------------------------------------------------------------------
+
+Released 2022-08-01
+
+Enhancements & New Features
+
+ * [AJ-451][AJ-468] Updated AWS API properties
+
+   The following properties have been added to the User-Agent string in the 
+   AWS API: 
+   - DriverVersion
+   - javaVersion
+   - Plugin Name
+
+
+Resolved Issues
+The following issues have been resolved in Simba Amazon Athena JDBC Connector 
+2.0.32. 
+   
+ * [AJ-470] When using CheckNonProxyHost, the connector returns a 
+   NullPointerException. 
+
+ * [AJ-471] When CheckNonProxyHost is set to any value, the connector 
+   terminates unexpectedly.  
+
+ * [AJ-473] When authenticating with Browser SAML, the connector does not 
+   parse the login_url property correctly. 
+
+
+2.0.31 -----------------------------------------------------------------------
+
+Released 2022-05-30
+
+Resolved Issues
+The following issues have been resolved in Simba Amazon Athena JDBC Connector 
+2.0.31. 
+   
+ * [AJ-461] When using JDBC API version 4.1 (Java 7), the connector returns a
+   "Cannot find driver class" error message. 
+
+ * [AJ-460] When building the connector from source code, the connector
+   returns an error. 
+
+
+2.0.30 -----------------------------------------------------------------------
+
+Released 2022-05-24
+
+Enhancements & New Features
+
+ * Internal connector improvements
+
+   The connector has been updated with minor internal improvements.   
+
+
+Resolved Issues
+The following issue has been resolved in Simba Amazon Athena JDBC Connector 
+2.0.30. 
+   
+ * [AJ-448] When executing queries with multiple threads, the connector
+   returns an error. 
+
+
+2.0.29 -----------------------------------------------------------------------
+
+Released 2022-05-06
+
+Enhancements & New Features
+
+ * [AJ-457] Updated Jackson libraries
+
+   The connector now uses the following libraries for the Jackson JSON parser:
+   - jackson-annotations-2.13.2 (previously 2.11.3)
+   - jackson-core-2.13.2 (previously 2.11.3)
+   - jackson-databind-2.13.2.2 (previously 2.11.3)
+   - jackson-dataformat-cbor-2.13.2 (previously 2.11.3) 
+
+
+Resolved Issues
+The following issue has been resolved in Simba Amazon Athena JDBC Connector 
+2.0.29. 
+   
+ * [AJ-459] Updated SAML Plugin browser launch process.   
+ 
+
+2.0.28 -----------------------------------------------------------------------
+
+Released 2022-04-06
+
+Enhancements & New Features
+
+ * [AJ-445] Support for JWT authentication
+ 
+   The connector now supports JSON Web Token (JWT) for authentication. For 
+   more information, see the Installation and Configuration Guide.
+   
+* Updated Log4j libraries
+ 
+   The connector now uses the following Log4j libraries:   
+   - Log4j-api 2.17.1 (previously 2.17.0)
+   - Log4j-core 2.17.1 (previously 2.17.0)   
+   - Log4j-jcl 2.17.2
+   
+ * [AJ-447] Internal connector improvements
+
+   The connector has been updated with minor internal improvements.   
+   
+
+2.0.27 -----------------------------------------------------------------------
+
+Released 2022-01-13
+
+Enhancements & New Features
+
+ * [AJ-435] Updated Log4j library
+ 
+   The connector has been updated to version 2.17.0 of the Log4j third-party 
+   library.
+
+ * [AJ-436] Improvements to user-agent string
+
+   The connector now includes the connector version number in the user-agent
+   string.
+   
+
+2.0.26 -----------------------------------------------------------------------
+
+Released 2021-12-14 
+
+Enhancements & New Features
+
+ * Internal connector improvements
+
+   The connector has been updated with minor internal improvements.
+   
+
+==============================================================================
